@@ -1,1 +1,799 @@
-# tutoria-G16
+# Ejercicios prácticos — POO con Java
+**CodiGo by Tecsup · Sesión de refuerzo**
+ 
+---
+ 
+## BLOQUE 1 · Clases y Atributos
+ 
+### Ejercicio 1 — Crear una clase y sus objetos
+ 
+Crea una clase `Pelicula` con los siguientes atributos (sin modificadores de acceso):
+- `titulo` (String)
+- `duracionMinutos` (int)
+- `calificacion` (double)
+En el `Main`:
+1. Crea dos objetos de tipo `Pelicula`.
+2. Asigna valores distintos a cada uno directamente.
+3. Imprime los tres atributos de cada película.
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Pelicula.java
+public class Pelicula {
+    String titulo;
+    int duracionMinutos;
+    double calificacion;
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Pelicula p1 = new Pelicula();
+        p1.titulo = "Inception";
+        p1.duracionMinutos = 148;
+        p1.calificacion = 8.8;
+ 
+        Pelicula p2 = new Pelicula();
+        p2.titulo = "Interstellar";
+        p2.duracionMinutos = 169;
+        p2.calificacion = 8.6;
+ 
+        System.out.println(p1.titulo);           // Inception
+        System.out.println(p1.duracionMinutos);  // 148
+        System.out.println(p1.calificacion);     // 8.8
+ 
+        System.out.println(p2.titulo);           // Interstellar
+        System.out.println(p2.duracionMinutos);  // 169
+        System.out.println(p2.calificacion);     // 8.6
+    }
+}
+```
+ 
+```
+// Salida en consola:
+Inception
+148
+8.8
+Interstellar
+169
+8.6
+```
+ 
+</details>
+---
+ 
+### Ejercicio 2 — Referencias e independencia de objetos
+ 
+Crea una clase `Producto` con atributos `nombre` (String) y `precio` (double).
+ 
+En el `Main`:
+1. Crea un objeto `p1` con nombre "Auriculares" y precio 120.0.
+2. Crea un objeto `p2` con nombre "Teclado" y precio 85.0.
+3. Cambia el precio de `p1` a 99.0.
+4. Imprime el precio de `p1` y el de `p2`.
+¿Cambiar el precio de `p1` afectó a `p2`? ¿Por qué?
+ 
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Producto.java
+public class Producto {
+    String nombre;
+    double precio;
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Producto p1 = new Producto();
+        p1.nombre = "Auriculares";
+        p1.precio = 120.0;
+ 
+        Producto p2 = new Producto();
+        p2.nombre = "Teclado";
+        p2.precio = 85.0;
+ 
+        p1.precio = 99.0;
+ 
+        System.out.println(p1.precio);  // 99.0
+        System.out.println(p2.precio);  // 85.0 — no cambió
+    }
+}
+```
+ 
+```
+// Salida en consola:
+99.0
+85.0
+```
+ 
+> `p1` y `p2` apuntan a dos objetos distintos en memoria. Cambiar uno no afecta al otro.
+ 
+</details>
+---
+ 
+## BLOQUE 2 · Constructores
+ 
+### Ejercicio 3 — Constructor con parámetros
+ 
+Crea una clase `Cancion` con atributos `titulo` (String), `artista` (String) y `duracion` (int, en segundos).
+ 
+Agrega un constructor con parámetros que inicialice los tres atributos.
+ 
+En el `Main`:
+1. Crea tres objetos `Cancion` usando el constructor.
+2. Imprime los datos de cada canción en el formato: `"titulo" - artista (Xs)`
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Cancion.java
+public class Cancion {
+    String titulo;
+    String artista;
+    int duracion;
+ 
+    public Cancion(String titulo, String artista, int duracion) {
+        this.titulo = titulo;
+        this.artista = artista;
+        this.duracion = duracion;
+    }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Cancion c1 = new Cancion("Bohemian Rhapsody", "Queen", 354);
+        Cancion c2 = new Cancion("Blinding Lights", "The Weeknd", 200);
+        Cancion c3 = new Cancion("Shape of You", "Ed Sheeran", 234);
+ 
+        System.out.println("\"" + c1.titulo + "\" - " + c1.artista + " (" + c1.duracion + "s)");
+        System.out.println("\"" + c2.titulo + "\" - " + c2.artista + " (" + c2.duracion + "s)");
+        System.out.println("\"" + c3.titulo + "\" - " + c3.artista + " (" + c3.duracion + "s)");
+    }
+}
+```
+ 
+```
+// Salida en consola:
+"Bohemian Rhapsody" - Queen (354s)
+"Blinding Lights" - The Weeknd (200s)
+"Shape of You" - Ed Sheeran (234s)
+```
+ 
+</details>
+---
+ 
+### Ejercicio 4 — Constructor vacío vs con parámetros
+ 
+Crea una clase `Vehiculo` con atributos `marca` (String) y `velocidadMaxima` (int).
+ 
+Agrega dos constructores:
+- Uno vacío que no recibe nada.
+- Uno con parámetros que recibe marca y velocidad máxima.
+En el `Main`:
+1. Crea un vehículo con el constructor vacío e imprime sus atributos — ¿qué aparece?
+2. Crea un vehículo con el constructor con parámetros e imprime sus atributos.
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Vehiculo.java
+public class Vehiculo {
+    String marca;
+    int velocidadMaxima;
+ 
+    public Vehiculo() {
+    }
+ 
+    public Vehiculo(String marca, int velocidadMaxima) {
+        this.marca = marca;
+        this.velocidadMaxima = velocidadMaxima;
+    }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Vehiculo v1 = new Vehiculo();
+        System.out.println(v1.marca);            // null
+        System.out.println(v1.velocidadMaxima);  // 0
+ 
+        Vehiculo v2 = new Vehiculo("Toyota", 180);
+        System.out.println(v2.marca);            // Toyota
+        System.out.println(v2.velocidadMaxima);  // 180
+    }
+}
+```
+ 
+```
+// Salida en consola:
+null
+0
+Toyota
+180
+```
+ 
+> Java asigna `null` a los String y `0` a los int cuando no se inicializan.
+ 
+</details>
+---
+ 
+## BLOQUE 3 · Encapsulamiento
+ 
+### Ejercicio 5 — Encapsular una clase
+ 
+Toma la clase `Cancion` del Ejercicio 3 y encapsúlala:
+- Haz todos los atributos `private`.
+- Agrega getters para los tres atributos.
+- Agrega setters para `titulo` y `artista` (no para `duracion`).
+En el `Main`:
+1. Crea una canción con el constructor.
+2. Cambia el título usando el setter.
+3. Intenta cambiar la duración directamente (`cancion.duracion = 200`) — ¿qué pasa?
+4. Imprime los datos usando los getters.
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Cancion.java
+public class Cancion {
+    private String titulo;
+    private String artista;
+    private int duracion;
+ 
+    public Cancion(String titulo, String artista, int duracion) {
+        this.titulo = titulo;
+        this.artista = artista;
+        this.duracion = duracion;
+    }
+ 
+    public String getTitulo() { return titulo; }
+    public String getArtista() { return artista; }
+    public int getDuracion() { return duracion; }
+ 
+    public void setTitulo(String titulo) { this.titulo = titulo; }
+    public void setArtista(String artista) { this.artista = artista; }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Cancion c = new Cancion("Bohemian Rhapsody", "Queen", 354);
+ 
+        c.setTitulo("We Will Rock You");
+        // c.duracion = 200;  ← ERROR de compilación: duracion es private
+ 
+        System.out.println(c.getTitulo());    // We Will Rock You
+        System.out.println(c.getArtista());   // Queen
+        System.out.println(c.getDuracion());  // 354
+    }
+}
+```
+ 
+```
+// Salida en consola:
+We Will Rock You
+Queen
+354
+```
+ 
+</details>
+---
+ 
+### Ejercicio 6 — Encapsular y agregar comportamiento
+ 
+Crea una clase `CuentaBancaria` con atributos privados `titular` (String) y `saldo` (double).
+ 
+Agrega:
+- Constructor con parámetros para ambos atributos.
+- Getters para ambos.
+- Setter solo para `titular`.
+- Un método `depositar(double monto)` que sume el monto al saldo e imprima el nuevo saldo.
+- Un método `mostrarInfo()` que imprima titular y saldo.
+En el `Main`:
+1. Crea una cuenta con saldo inicial de 500.0.
+2. Deposita 200.0.
+3. Imprime la información de la cuenta.
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// CuentaBancaria.java
+public class CuentaBancaria {
+    private String titular;
+    private double saldo;
+ 
+    public CuentaBancaria(String titular, double saldo) {
+        this.titular = titular;
+        this.saldo = saldo;
+    }
+ 
+    public String getTitular() { return titular; }
+    public double getSaldo() { return saldo; }
+ 
+    public void setTitular(String titular) { this.titular = titular; }
+ 
+    public void depositar(double monto) {
+        saldo = saldo + monto;
+        System.out.println("Nuevo saldo: S/" + saldo);
+    }
+ 
+    public void mostrarInfo() {
+        System.out.println("Titular: " + titular + " | Saldo: S/" + saldo);
+    }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        CuentaBancaria cuenta = new CuentaBancaria("Ana García", 500.0);
+        cuenta.depositar(200.0);
+        cuenta.mostrarInfo();
+    }
+}
+```
+ 
+```
+// Salida en consola:
+Nuevo saldo: S/700.0
+Titular: Ana García | Saldo: S/700.0
+```
+ 
+</details>
+---
+ 
+## BLOQUE 4 · Herencia
+ 
+### Ejercicio 7 — Crear una jerarquía simple
+ 
+Crea una clase padre `Dispositivo` con atributos privados `marca` (String) y `precio` (double), constructor con parámetros, getters y un método `mostrarInfo()`.
+ 
+Luego crea dos subclases:
+- `Celular` con atributo extra `memoriaGB` (int)
+- `Laptop` con atributo extra `ramGB` (int)
+Cada subclase debe tener su propio constructor que llame a `super()` y sobreescribir `mostrarInfo()`.
+ 
+En el `Main`, instancia un objeto de cada subclase y llama a `mostrarInfo()`.
+ 
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Dispositivo.java
+public class Dispositivo {
+    private String marca;
+    private double precio;
+ 
+    public Dispositivo(String marca, double precio) {
+        this.marca = marca;
+        this.precio = precio;
+    }
+ 
+    public String getMarca() { return marca; }
+    public double getPrecio() { return precio; }
+ 
+    public void mostrarInfo() {
+        System.out.println("Marca: " + marca + " | Precio: S/" + precio);
+    }
+}
+ 
+// Celular.java
+public class Celular extends Dispositivo {
+    private int memoriaGB;
+ 
+    public Celular(String marca, double precio, int memoriaGB) {
+        super(marca, precio);
+        this.memoriaGB = memoriaGB;
+    }
+ 
+    @Override
+    public void mostrarInfo() {
+        System.out.println("=== CELULAR ===");
+        System.out.println("Marca: " + getMarca());
+        System.out.println("Precio: S/" + getPrecio());
+        System.out.println("Memoria: " + memoriaGB + "GB");
+    }
+}
+ 
+// Laptop.java
+public class Laptop extends Dispositivo {
+    private int ramGB;
+ 
+    public Laptop(String marca, double precio, int ramGB) {
+        super(marca, precio);
+        this.ramGB = ramGB;
+    }
+ 
+    @Override
+    public void mostrarInfo() {
+        System.out.println("=== LAPTOP ===");
+        System.out.println("Marca: " + getMarca());
+        System.out.println("Precio: S/" + getPrecio());
+        System.out.println("RAM: " + ramGB + "GB");
+    }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Celular c = new Celular("Samsung", 1200.0, 128);
+        Laptop l = new Laptop("Lenovo", 2500.0, 16);
+ 
+        c.mostrarInfo();
+        System.out.println("---");
+        l.mostrarInfo();
+    }
+}
+```
+ 
+```
+// Salida en consola:
+=== CELULAR ===
+Marca: Samsung
+Precio: S/1200.0
+Memoria: 128GB
+---
+=== LAPTOP ===
+Marca: Lenovo
+Precio: S/2500.0
+RAM: 16GB
+```
+ 
+</details>
+---
+ 
+### Ejercicio 8 — Herencia y atributos privados
+ 
+Usando la jerarquía del Ejercicio 7, dentro del método `mostrarInfo()` de `Celular` intenta usar `marca` directamente en lugar de `getMarca()`.
+ 
+¿Qué pasa? ¿Por qué puedes usar `getMarca()` pero no `marca` directamente?
+ 
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Dentro de Celular.java — en mostrarInfo():
+System.out.println(getMarca());   // ✓ compila — getter es public
+System.out.println(marca);        // ✗ ERROR de compilación — marca es private en Dispositivo
+```
+ 
+> `private` significa "solo dentro de esta clase". La herencia da acceso a lo `public` y `protected`, no a lo `private`. El getter es la única puerta de salida.
+ 
+</details>
+---
+ 
+## BLOQUE 5 · Polimorfismo
+ 
+### Ejercicio 9 — El mismo método, resultados distintos
+ 
+Usando la jerarquía `Dispositivo` / `Celular` / `Laptop` del Ejercicio 7, declara en el `Main` tres variables de tipo `Dispositivo`:
+ 
+```java
+Dispositivo d1 = new Celular("Samsung", 1200.0, 128);
+Dispositivo d2 = new Laptop("Lenovo", 2500.0, 16);
+Dispositivo d3 = new Celular("Apple", 3500.0, 256);
+```
+ 
+Llama a `mostrarInfo()` en cada uno. ¿Por qué funciona si `d1` es de tipo `Dispositivo` y no de tipo `Celular`?
+ 
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Dispositivo d1 = new Celular("Samsung", 1200.0, 128);
+        Dispositivo d2 = new Laptop("Lenovo", 2500.0, 16);
+        Dispositivo d3 = new Celular("Apple", 3500.0, 256);
+ 
+        d1.mostrarInfo();
+        System.out.println("---");
+        d2.mostrarInfo();
+        System.out.println("---");
+        d3.mostrarInfo();
+    }
+}
+```
+ 
+```
+// Salida en consola:
+=== CELULAR ===
+Marca: Samsung
+Precio: S/1200.0
+Memoria: 128GB
+---
+=== LAPTOP ===
+Marca: Lenovo
+Precio: S/2500.0
+RAM: 16GB
+---
+=== CELULAR ===
+Marca: Apple
+Precio: S/3500.0
+Memoria: 256GB
+```
+ 
+> Java mira el objeto real en memoria (`Celular`, `Laptop`), no el tipo de la variable (`Dispositivo`). Por eso cada uno ejecuta su propia versión de `mostrarInfo()`.
+ 
+</details>
+---
+ 
+### Ejercicio 10 — Métodos heredados
+ 
+Agrega un método `encender()` en la clase padre `Dispositivo` que imprima `"[marca] encendido"`. No lo sobreescribas en ninguna subclase.
+ 
+En el `Main`, llama a `encender()` desde un objeto `Celular` y uno `Laptop`.
+ 
+¿Dónde está definido `encender()`? ¿Cómo lo encontró Java si no está en `Celular`?
+ 
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// En Dispositivo.java — agregar:
+public void encender() {
+    System.out.println(getMarca() + " encendido");
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Celular c = new Celular("Samsung", 1200.0, 128);
+        Laptop l = new Laptop("Lenovo", 2500.0, 16);
+ 
+        c.encender();
+        l.encender();
+    }
+}
+```
+ 
+```
+// Salida en consola:
+Samsung encendido
+Lenovo encendido
+```
+ 
+> `encender()` está en `Dispositivo`. Como `Celular` y `Laptop` heredan de él, lo reciben automáticamente sin reescribirlo.
+ 
+</details>
+---
+ 
+## BLOQUE 6 · Abstracción
+ 
+### Ejercicio 11 — Clase abstracta
+ 
+Convierte `Dispositivo` en clase abstracta y declara `mostrarInfo()` como método abstracto.
+ 
+1. Intenta instanciar `Dispositivo` directamente en el `Main` — ¿qué error aparece?
+2. Verifica que `Celular` y `Laptop` siguen funcionando sin cambios.
+3. Agrega una tercera subclase `Tablet` con un atributo extra `tieneLapiz` (boolean) e implementa `mostrarInfo()`.
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Dispositivo.java
+public abstract class Dispositivo {
+    private String marca;
+    private double precio;
+ 
+    public Dispositivo(String marca, double precio) {
+        this.marca = marca;
+        this.precio = precio;
+    }
+ 
+    public String getMarca() { return marca; }
+    public double getPrecio() { return precio; }
+ 
+    public void encender() {
+        System.out.println(getMarca() + " encendido");
+    }
+ 
+    public abstract void mostrarInfo();
+}
+ 
+// Tablet.java
+public class Tablet extends Dispositivo {
+    private boolean tieneLapiz;
+ 
+    public Tablet(String marca, double precio, boolean tieneLapiz) {
+        super(marca, precio);
+        this.tieneLapiz = tieneLapiz;
+    }
+ 
+    @Override
+    public void mostrarInfo() {
+        System.out.println("=== TABLET ===");
+        System.out.println("Marca: " + getMarca());
+        System.out.println("Precio: S/" + getPrecio());
+        System.out.println("Tiene lápiz: " + tieneLapiz);
+    }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        // Dispositivo d = new Dispositivo("X", 100); ← ERROR: no se puede instanciar
+ 
+        Tablet t = new Tablet("Apple", 1800.0, true);
+        t.mostrarInfo();
+    }
+}
+```
+ 
+```
+// Salida en consola:
+=== TABLET ===
+Marca: Apple
+Precio: S/1800.0
+Tiene lápiz: true
+```
+ 
+</details>
+---
+ 
+### Ejercicio 12 — Interfaz
+ 
+Crea una interfaz `Conectable` con un método `conectarWifi()`.
+ 
+1. Implementa `Conectable` en `Celular` y `Laptop`, pero no en `Tablet`.
+2. En cada clase, `conectarWifi()` imprime un mensaje distinto.
+3. En el `Main`, declara una variable de tipo `Conectable` y asígnale un `Celular`. Llama a `conectarWifi()`.
+¿Puedes llamar a `mostrarInfo()` desde esa variable? ¿Por qué?
+ 
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Conectable.java
+public interface Conectable {
+    void conectarWifi();
+}
+ 
+// Celular.java — agregar implements:
+public class Celular extends Dispositivo implements Conectable {
+    // ... mismo código de antes ...
+ 
+    @Override
+    public void conectarWifi() {
+        System.out.println(getMarca() + " conectado al WiFi");
+    }
+}
+ 
+// Laptop.java — agregar implements:
+public class Laptop extends Dispositivo implements Conectable {
+    // ... mismo código de antes ...
+ 
+    @Override
+    public void conectarWifi() {
+        System.out.println(getMarca() + " conectado a la red");
+    }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Conectable c = new Celular("Samsung", 1200.0, 128);
+        c.conectarWifi();
+ 
+        // c.mostrarInfo(); ← ERROR: mostrarInfo() no existe en Conectable
+    }
+}
+```
+ 
+```
+// Salida en consola:
+Samsung conectado al WiFi
+```
+ 
+> Desde una variable de tipo `Conectable` solo puedes llamar a los métodos definidos en esa interfaz.
+ 
+</details>
+---
+ 
+## Ejercicio integrador
+ 
+### Ejercicio 13 — Sistema de música
+ 
+Construye desde cero un pequeño sistema de música con las siguientes clases:
+ 
+**Clase abstracta `Contenido`:**
+- Atributos privados: `titulo` (String), `artista` (String)
+- Constructor con parámetros y getters
+- Método abstracto `reproducir()`
+**Interfaz `Descargable`:**
+- Método `descargar()`
+**Subclase `Cancion` que extiende `Contenido`:**
+- Atributo extra `duracionSegundos` (int)
+- `reproducir()` imprime: `Reproduciendo: titulo - artista (Xs)`
+**Subclase `Podcast` que extiende `Contenido` e implementa `Descargable`:**
+- Atributo extra `episodio` (int)
+- `reproducir()` imprime: `Episodio N: titulo`
+- `descargar()` imprime: `Descargando episodio N...`
+En el `Main`:
+1. Crea dos canciones y un podcast.
+2. Llama a `reproducir()` en los tres.
+3. Llama a `descargar()` en el podcast.
+4. Declara una variable de tipo `Contenido` y asígnale una canción. Llama a `reproducir()`.
+<details>
+<summary>🔍 Ver solución</summary>
+```java
+// Contenido.java
+public abstract class Contenido {
+    private String titulo;
+    private String artista;
+ 
+    public Contenido(String titulo, String artista) {
+        this.titulo = titulo;
+        this.artista = artista;
+    }
+ 
+    public String getTitulo() { return titulo; }
+    public String getArtista() { return artista; }
+ 
+    public abstract void reproducir();
+}
+ 
+// Descargable.java
+public interface Descargable {
+    void descargar();
+}
+ 
+// Cancion.java
+public class Cancion extends Contenido {
+    private int duracionSegundos;
+ 
+    public Cancion(String titulo, String artista, int duracionSegundos) {
+        super(titulo, artista);
+        this.duracionSegundos = duracionSegundos;
+    }
+ 
+    @Override
+    public void reproducir() {
+        System.out.println("Reproduciendo: " + getTitulo()
+            + " - " + getArtista()
+            + " (" + duracionSegundos + "s)");
+    }
+}
+ 
+// Podcast.java
+public class Podcast extends Contenido implements Descargable {
+    private int episodio;
+ 
+    public Podcast(String titulo, String artista, int episodio) {
+        super(titulo, artista);
+        this.episodio = episodio;
+    }
+ 
+    @Override
+    public void reproducir() {
+        System.out.println("Episodio " + episodio + ": " + getTitulo());
+    }
+ 
+    @Override
+    public void descargar() {
+        System.out.println("Descargando episodio " + episodio + "...");
+    }
+}
+ 
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Cancion c1 = new Cancion("Bohemian Rhapsody", "Queen", 354);
+        Cancion c2 = new Cancion("Blinding Lights", "The Weeknd", 200);
+        Podcast p  = new Podcast("Historia del Jazz", "Radio Clásica", 5);
+ 
+        c1.reproducir();
+        c2.reproducir();
+        p.reproducir();
+        p.descargar();
+ 
+        System.out.println("---");
+        Contenido contenido = new Cancion("Shape of You", "Ed Sheeran", 234);
+        contenido.reproducir();
+    }
+}
+```
+ 
+```
+// Salida en consola:
+Reproduciendo: Bohemian Rhapsody - Queen (354s)
+Reproduciendo: Blinding Lights - The Weeknd (200s)
+Episodio 5: Historia del Jazz
+Descargando episodio 5...
+---
+Reproduciendo: Shape of You - Ed Sheeran (234s)
+```
+ 
+</details>
